@@ -4,7 +4,9 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.chalitta.myanimelist.R
 import com.chalitta.myanimelist.adapter.AnimelistAdapter
 import com.chalitta.myanimelist.viewmodel.AnimeViewModel
@@ -26,7 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         adapter = AnimelistAdapter(this)
-        rv_anime_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val layoutManager = GridLayoutManager(this, 3)
+        rv_anime_list.layoutManager = layoutManager
         rv_anime_list.adapter = adapter
     }
 

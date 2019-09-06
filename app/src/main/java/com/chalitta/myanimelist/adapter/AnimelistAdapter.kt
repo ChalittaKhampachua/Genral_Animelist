@@ -33,7 +33,7 @@ class AnimelistAdapter(private val context: Context) : RecyclerView.Adapter<Anim
         return mData.size
     }
 
-    override fun onBindViewHolder(holder: AnimelistAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         Picasso.get()
             .load(mData[position].image_url)

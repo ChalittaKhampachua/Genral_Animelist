@@ -6,6 +6,8 @@ import android.os.Bundle
 import com.chalitta.myanimelist.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
+import com.chalitta.myanimelist.manager.ManagerStateLifecyle
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -20,6 +22,9 @@ class DetailActivity : AppCompatActivity() {
         val recommendation_url = intent.getStringExtra("recommendation_url")
         val recommendation_count = intent.getIntExtra("recommendation_count", 0)
 
+        //Test Lifecycle
+        val managerStateListener = ManagerStateLifecyle(this, lifecycle)
+        managerStateListener.setName(title)
         setUI(mal_id, url,image_url, title, recommendation_url, recommendation_count)
 
     }

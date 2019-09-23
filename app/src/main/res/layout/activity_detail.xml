@@ -1,75 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:tools="http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		tools:context=".activity.DetailActivity"
-		android:padding="20dp"
-		android:orientation="vertical">
-  
-  <ImageView
-		  android:id="@+id/iv_photo_detail"
-		  android:layout_width="200dp"
-		  android:layout_height="200dp"
-		  android:layout_gravity="center"/>
-  
-  <TextView
-		  android:id="@+id/tv_name"
-		  android:layout_width="match_parent"
-		  android:layout_height="wrap_content"
-		  android:padding="10dp"
-		  android:textSize="18sp"
-		  android:textColor="@color/colorAccent"
-		  android:layout_gravity="center"
-		  android:gravity="center"
-		  android:text="name"/>
-  
-  <TextView
-		  android:id="@+id/tv_mal_id"
-		  android:layout_width="match_parent"
-		  android:layout_height="wrap_content"
-		  android:padding="10dp"
-		  android:textSize="18sp"
-		  android:textColor="@color/colorAccent"
-		  android:layout_gravity="center"
-		  android:gravity="start"
-		  android:text="mal_id"/>
-  
-  <TextView
-		  android:id="@+id/tv_url"
-		  android:layout_width="match_parent"
-		  android:layout_height="wrap_content"
-		  android:padding="10dp"
-		  android:textSize="18sp"
-		  android:textColor="@color/colorAccent"
-		  android:layout_gravity="center"
-		  android:gravity="start"
-		  android:text="url"/>
-  
-  
-  <TextView
-		  android:id="@+id/tv_recommendation_url"
-		  android:layout_width="match_parent"
-		  android:layout_height="wrap_content"
-		  android:padding="10dp"
-		  android:textSize="18sp"
-		  android:textColor="@color/colorAccent"
-		  android:layout_gravity="center"
-		  android:gravity="start"
-		  android:text="recommendation_url"/>
-  
-  
-  <TextView
-		  android:id="@+id/tv_recommendation_count"
-		  android:layout_width="match_parent"
-		  android:layout_height="wrap_content"
-		  android:padding="10dp"
-		  android:textSize="18sp"
-		  android:textColor="@color/colorAccent"
-		  android:layout_gravity="center"
-		  android:gravity="start"
-		  android:text="recommendation_count"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.chalitta.myanimelist.model.RecommendAnime" />
+    </data>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context=".activity.DetailActivity">
+
+        <ImageView
+            android:id="@+id/iv_photo_detail"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:imageUrl="@{String.valueOf(item.image_url)}"
+            app:error="@{@drawable/ic_image}"
+            app:placeholder="@{@drawable/ic_image}"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@{String.valueOf(item.title)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_mal_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:padding="10dp"
+            android:text="@{String.valueOf(item.mal_id)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:padding="10dp"
+            android:text="@{String.valueOf(item.url)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
 
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_recommendation_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:padding="10dp"
+            android:text="@{String.valueOf(item.recommendation_url)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/tv_recommendation_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="start"
+            android:padding="10dp"
+            android:text="@{String.valueOf(item.recommendation_count)}"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+</layout>

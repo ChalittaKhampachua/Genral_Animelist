@@ -1,47 +1,32 @@
 package com.chalitta.myanimelist.activity
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import com.chalitta.myanimelist.R
-import com.chalitta.myanimelist.adapter.AnimelistAdapter
+import com.chalitta.myanimelist.databinding.ActivityMainBinding
 import com.chalitta.myanimelist.viewmodel.AnimeViewModel
-import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: AnimeViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
 
-        fetchData()
-        initView()
-
+        viewModel.fetchData(this)
+        viewModel.initSearch(binding.etSearch)
     }
 
-    private lateinit var adapter: AnimelistAdapter
-
-    private fun initView() {
-        adapter = AnimelistAdapter(this)
-        val layoutManager = GridLayoutManager(this, 3)
-        rv_anime_list.layoutManager = layoutManager
-        rv_anime_list.adapter = adapter
-    }
-
-    private fun fetchData() {
-        val viewModel = ViewModelProviders.of(this).get(AnimeViewModel::class.java)
-        val liveData = viewModel.getDataAnimeLiveData()
-
-        liveData.observe(this, Observer {anime ->
-            anime?.let {
-                adapter.setAnimeList(it.recommendations)
-                adapter.notifyDataSetChanged()
-            }
-        })
+    fun checkString(text: String?): Boolean {
+        return text?.let{
+            it.length > 5
+        }?: (false)
     }
 }
